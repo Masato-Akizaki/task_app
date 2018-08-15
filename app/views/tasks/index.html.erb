@@ -1,11 +1,10 @@
 <% provide(:title, 'Task Manegement Tool') %>
-<div class="container">
-  <h1>タスク一覧</h1>
-    <div class="new-task">
-      <%= link_to "新規タスクを追加" , "/tasks/new", class: "btn btn-primary"%>
-    </div>
-    <%= render @tasks%>
+<h1>タスク一覧</h1>
+<div class="new-task">
+  <%= link_to "新規タスクを追加" , "/tasks/new", class: "btn btn-primary"%>
 </div>
+<%= render @tasks%>
+
     <!-- <% @tasks.each do |task| %>
       <div class="tasks-index-item">
         <div class="tasks">

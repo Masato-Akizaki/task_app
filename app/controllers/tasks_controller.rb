@@ -1,3 +1,4 @@
+# coding: utf-8
 class TasksController < ApplicationController
   def index
     @tasks = Task.all
@@ -10,6 +11,7 @@ class TasksController < ApplicationController
   def create
     @task = Task.new(task_params)
     if @task.save
+      flash[:success] = "タスクを作成しました"
       redirect_to root_url
     else
       render 'new'
@@ -27,6 +29,7 @@ class TasksController < ApplicationController
   def update
     @task = Task.find(params[:id])
     if @task.update_attributes(task_params)
+      flash[:success] = "タスクを更新しました"
       redirect_to root_url
     else
       render 'edit'
@@ -36,6 +39,7 @@ class TasksController < ApplicationController
   def destroy
     @task = Task.find_by(id: params[:id])
     @task.destroy
+    flash[:success] = "タスクを削除しました"
     redirect_to root_url
   end
 
