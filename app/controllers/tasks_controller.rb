@@ -8,14 +8,11 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task = Task.new(
-      name: params[:name],
-      detail: params[:detail]
-    )
+    @task = Task.new(task_params)
     if @task.save
-      redirect_to("/")
+      redirect_to root_url
     else
-      render("tasks/new")
+      render 'new'
     end
   end
 
@@ -28,19 +25,24 @@ class TasksController < ApplicationController
   end
 
   def update
-    @task = Task.find_by(id: params[:id])
-    @task.name = params[:name]
-    @task.detail = params[:detail]
-    if @task.save
-      redirect_to("/")
+    @task = Task.find(params[:id])
+    if @task.update_attributes(task_params)
+      redirect_to root_url
     else
-      render("tasks/edit")
+      render 'edit'
     end
   end
 
   def destroy
     @task = Task.find_by(id: params[:id])
     @task.destroy
-    redirect_to("/")
+    redirect_to root_url
   end
+
+  private
+
+    def task_params
+      params.require(:task).permit(:name, :detail)
+    end
+
 end
