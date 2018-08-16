@@ -1,10 +1,10 @@
 <%= form_for(@task) do |f| %>
   <div class="field">
-    <%= f.label :"タスク名" %>
+    <%= f.label :name, "タスク名" %>
     <%= f.text_field :name, class: 'form-control' %>
   </div>
   <div class="area">
-    <%= f.label :"詳細" %>
+    <%= f.label :detail, "詳細" %>
     <%= f.text_area :detail, class: 'form-control' %>
   </div>
     <%= f.submit yield(:button_text), class: "btn btn-primary" %>
