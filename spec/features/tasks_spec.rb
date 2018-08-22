@@ -72,4 +72,13 @@ RSpec.feature "Tasks", type: :feature do
       expect(Task.find_by(id: 1)).to eq nil
     end
   end
+
+  describe "タスク一覧の表示順" do
+    it "created_at降順で並び替える" do
+      Task.create(id: 1, name: "task1", created_at: Time.current + 1.hours)
+      Task.create(id: 2, name: "task2", created_at: Time.current + 2.hours)
+
+      expect(Task.order("created_at DESC").map(&:id)).to eq [2,1]
+    end
+  end
 end
