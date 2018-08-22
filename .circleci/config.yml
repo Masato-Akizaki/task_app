@@ -35,6 +35,21 @@ jobs:
           paths:
             - ./vendor/bundle
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+    
+  test:
+    docker:
+      # specify the version you desire here
+       - image: circleci/ruby:2.5.1-node-browsers
+      
+      # Specify service dependencies here if necessary
+      # CircleCI maintains a library of pre-built images
+      # documented at https://circleci.com/docs/2.0/circleci-images/
+       - image: circleci/postgres:10.4
+
+    working_directory: ~/task_app
+
+    steps:
+      - checkout    
         
       # Database setup
       - run: bundle exec rake db:create
