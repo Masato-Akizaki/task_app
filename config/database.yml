@@ -50,6 +50,9 @@ test:
   pool: 5
   username: task_app
   password:
+  host: localhost
+  port: 5432
+
 
 production:
   adapter: postgresql
