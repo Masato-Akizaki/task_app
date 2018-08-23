@@ -12,7 +12,7 @@ jobs:
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
       # documented at https://circleci.com/docs/2.0/circleci-images/
-       - image: circleci/postgres:10.4-alpine
+       - image: circleci/postgres:10.4
 
     working_directory: ~/task_app
 
@@ -34,8 +34,12 @@ jobs:
       - save_cache:
           paths:
             - ./vendor/bundle
-          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
-
+					key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+					
+			- run:
+          name: Wait for DB
+          command: dockerize -wait tcp://localhost:3000 -timeout 1m
+        
       # Database setup
       - run: bundle exec rake db:create
       - run: bundle exec rake db:schema:load
