@@ -15,7 +15,6 @@ jobs:
       - image: circleci/postgres:10.4-alpine
         environment:
           POSTGRES_USER: task_app
-          POSTGRES_DB: task_app_test
           
     working_directory: ~/task_app
 
@@ -40,7 +39,7 @@ jobs:
 
       - run:
           name: Wait for DB
-          command: dockerize -wait tcp://localhost:5432 -timeout 5m
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
 
       # Database setup
       - run: bundle exec rake db:create
