@@ -3,13 +3,4 @@
 <div class="new-task">
   <%= link_to "新規タスクを追加" , "/tasks/new", class: "btn btn-primary"%>
 </div>
-<%= render @tasks%>
-
-    <!-- <% @tasks.each do |task| %>
-      <div class="tasks-index-item">
-        <div class="tasks">
-            <%= task.name %>
-          </div>
-            <%= task.detail %>
-        </div>
-    <% end %>
+<%= render @tasks %>
