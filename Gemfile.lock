@@ -236,6 +236,7 @@ DEPENDENCIES
   pg
   puma (~> 3.11)
   rails (~> 5.2.1)
+  rake (~> 12.3.1)
   rspec-rails
   rspec_junit_formatter
   sass-rails (~> 5.0)
