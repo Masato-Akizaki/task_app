@@ -38,8 +38,9 @@ class TasksController < ApplicationController
 
   def destroy
     @task = Task.find_by(id: params[:id])
-    if @task != nil
-      @task.destroy
+    if @task.nil?
+      redirect_to root_url
+    elsif @task.destroy
       flash[:success] = "タスクを削除しました"
       redirect_to root_url
     else
