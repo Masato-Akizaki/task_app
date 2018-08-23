@@ -32,12 +32,12 @@ jobs:
             bundle install --jobs=4 --retry=3 --path vendor/bundle
 
       - save_cache:
-          paths:
-            - ./vendor/bundle
-					key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+					paths:
+						- ./vendor/bundle
+						key: v1-dependencies-{{ checksum "Gemfile.lock" }}
 					
 			- run:
-          name: Wait for DB
+					name: Wait for DB
           command: dockerize -wait tcp://localhost:3000 -timeout 1m
         
       # Database setup
