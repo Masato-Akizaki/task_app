@@ -3,8 +3,13 @@
 <div class="new-task">
   <%= link_to "新規タスクを追加" , "/tasks/new", class: "btn btn-primary"%>
 </div>
-<%= render @tasks%>
-
+<div class = "sort">
+  <%= sortable "created_at", "作成順" %>
+  <%= sortable "deadline", "期限順" %>
+</div>
+<div class = "tasks">
+<%= render @tasks %>
+</div>
     <!-- <% @tasks.each do |task| %>
       <div class="tasks-index-item">
         <div class="tasks">

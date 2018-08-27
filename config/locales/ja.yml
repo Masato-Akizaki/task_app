@@ -5,6 +5,7 @@ ja:
       task:
         name: タスク名
         detail: 詳細
+        deadline: 期限日
     errors:
       messages:
         record_invalid: "バリデーションに失敗しました: %{errors}"

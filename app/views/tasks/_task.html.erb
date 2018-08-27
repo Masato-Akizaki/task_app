@@ -1,5 +1,6 @@
-<ul>
-  <li><%= "No.#{task.id}" %></li>
-  <li><%= link_to task.name, task %></li>
-  <li><%= link_to task.detail, task %></li>
+<ul class = "task">
+  <li class = "task-id"><%= "No.#{task.id}" %></li>
+  <li class = "task-name"><%= link_to task.name, task %></li>
+  <li class = "task-detail"><%= task.detail %></li>
+  <li class = "task-deadline"><%= task.deadline %></li>
 </ul>
