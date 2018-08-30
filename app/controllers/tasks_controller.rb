@@ -2,7 +2,7 @@ class TasksController < ApplicationController
   helper_method :sort_column, :sort_direction
 
   def index
-    @tasks = Task.all.order(sort_column + ' ' + sort_direction)
+    @tasks = Task.search(params[:name],params[:status]).order(sort_column + ' ' + sort_direction)
   end
 
   def new
@@ -47,7 +47,7 @@ class TasksController < ApplicationController
   private
 
     def task_params
-      params.require(:task).permit(:name, :detail, :deadline)
+      params.require(:task).permit(:name, :detail, :deadline, :status)
     end
 
     def sort_direction
@@ -57,4 +57,5 @@ class TasksController < ApplicationController
     def sort_column
         Task.column_names.include?(params[:sort]) ? params[:sort] : "created_at"
     end
+    
 end
