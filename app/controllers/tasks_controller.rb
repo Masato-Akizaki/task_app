@@ -3,6 +3,7 @@ class TasksController < ApplicationController
 
   def index
     @tasks = Task.search(params[:name],params[:status]).order(sort_column + ' ' + sort_direction)
+    @tasks = @tasks.page(params[:page]).per(20)
   end
 
   def new
