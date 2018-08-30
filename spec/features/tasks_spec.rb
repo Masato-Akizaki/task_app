@@ -16,6 +16,7 @@ RSpec.feature "Tasks", type: :feature do
       fill_in "詳細", with: "task1 is ..."
       fill_in "期限日", with: "2018/08/31"
       select "着手中", from: "ステータス"
+      select "高", from: "優先度"
       click_button "保存"
 
       expect(page).to have_content "タスクを登録しました"
@@ -23,6 +24,7 @@ RSpec.feature "Tasks", type: :feature do
       expect(page).to have_content "task1 is ..."
       expect(page).to have_content "2018-08-31"
       expect(page).to have_content "着手中"
+      expect(page).to have_content "高"
 
 
       task = Task.last
@@ -30,6 +32,7 @@ RSpec.feature "Tasks", type: :feature do
       expect(task.detail).to eq "task1 is ..."
       expect(task.deadline).to have_content "2018-08-31"
       expect(task.status).to have_content "着手中"
+      expect(task.priority).to have_content "高"
 
     end
   end
@@ -60,6 +63,7 @@ RSpec.feature "Tasks", type: :feature do
       fill_in "詳細", with: "task1-1 is ..."
       fill_in "期限日", with: "2018/08/31"
       select "着手中", from: "ステータス"
+      select "高", from: "優先度"
       click_button "保存"
 
       expect(page).to have_content "タスクを更新しました"
@@ -67,6 +71,7 @@ RSpec.feature "Tasks", type: :feature do
       expect(page).to have_content "task1-1 is ..."
       expect(page).to have_content "2018-08-31"
       expect(page).to have_content "着手中"
+      expect(page).to have_content "高"
 
 
       task = Task.find(1)
@@ -74,6 +79,8 @@ RSpec.feature "Tasks", type: :feature do
       expect(task.detail).to eq "task1-1 is ..."
       expect(task.deadline).to have_content "2018-08-31"
       expect(task.status).to have_content "着手中"
+      expect(task.priority).to have_content "高"
+
     end
 
     it "タスクを削除できる" do
