@@ -10,7 +10,7 @@ class TasksController < ApplicationController
   end
 
   def create
-    @user = User.first
+    @user = User.first #ログイン機能作成後、ログインユーザーのid参照に変更 
     @task = @user.tasks.build(task_params)
     if @task.save
       flash[:success] = "タスクを登録しました"
