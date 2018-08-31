@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.feature "Tasks", type: :feature do
   describe "新規タスク" do
     before do
+      User.create!(id: 1, name: 'user1', email: 'user1@example.com')
       visit root_path      
       click_link "新規タスクを追加" 
     end
@@ -38,8 +39,9 @@ RSpec.feature "Tasks", type: :feature do
   end
 
   describe "タスク詳細・編集・更新" do
-    before do   
-      Task.create!(id: 1, name: 'task1', detail: 'task1 is ...')
+    before do
+      User.create!(id: 1, name: 'user1', email: 'user1@example.com')   
+      Task.create!(id: 1, name: 'task1', detail: 'task1 is ...', user_id: 1)
       visit root_path
       click_link "task1" 
     end
@@ -96,10 +98,11 @@ RSpec.feature "Tasks", type: :feature do
 
   describe "タスク一覧の表示順" do
     before do
-      Task.create(id: 1, name: "task1", created_at: Time.current + 1.hours, deadline: Time.current + 1.month)
-      Task.create(id: 2, name: "task2", created_at: Time.current + 2.hours, deadline: Time.current + 3.month)
-      Task.create(id: 3, name: "task3", created_at: Time.current + 3.hours, deadline: Time.current + 2.month)
-      Task.create(id: 4, name: "task4", created_at: Time.current + 4.hours, deadline: Time.current + 4.month)
+      User.create!(id: 1, name: 'user1', email: 'user1@example.com')
+      Task.create(id: 1, name: "task1", created_at: Time.current + 1.hours, deadline: Time.current + 1.month, user_id: 1)
+      Task.create(id: 2, name: "task2", created_at: Time.current + 2.hours, deadline: Time.current + 3.month, user_id: 1)
+      Task.create(id: 3, name: "task3", created_at: Time.current + 3.hours, deadline: Time.current + 2.month, user_id: 1)
+      Task.create(id: 4, name: "task4", created_at: Time.current + 4.hours, deadline: Time.current + 4.month, user_id: 1)
       visit root_path
     end
 
@@ -138,9 +141,10 @@ RSpec.feature "Tasks", type: :feature do
 
   describe "タスクを検索" do
     before do
-      Task.create(id: 1, name: "task1", status: "完了")
-      Task.create(id: 2, name: "task2", status: "未着手")
-      Task.create(id: 3, name: "work3", status: "未着手")
+      User.create!(id: 1, name: 'user1', email: 'user1@example.com')
+      Task.create(id: 1, name: "task1", status: "完了", user_id: 1)
+      Task.create(id: 2, name: "task2", status: "未着手", user_id: 1)
+      Task.create(id: 3, name: "work3", status: "未着手", user_id: 1)
       visit root_path
     end
 
