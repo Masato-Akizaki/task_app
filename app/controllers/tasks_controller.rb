@@ -2,7 +2,10 @@ class TasksController < ApplicationController
   helper_method :sort_column, :sort_direction
 
   def index
-    @tasks = Task.search(params[:name],params[:status]).order(sort_column + ' ' + sort_direction).page(params[:page]).per(20)
+    if logged_in?
+      @user = current_user
+      @tasks = @user.tasks.search(params[:name],params[:status]).order(sort_column + ' ' + sort_direction).page(params[:page]).per(20)
+    end
   end
 
   def new
@@ -10,7 +13,7 @@ class TasksController < ApplicationController
   end
 
   def create
-    @user = User.first #ログイン機能作成後、ログインユーザーのid参照に変更 
+    @user = current_user #ログイン機能作成後、ログインユーザーのid参照に変更 
     @task = @user.tasks.build(task_params)
     if @task.save
       flash[:success] = "タスクを登録しました"

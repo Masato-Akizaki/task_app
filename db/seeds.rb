@@ -1,5 +1,6 @@
 User.create!(name: "user1",
-             email: "user1@example.com")
+             email: "user1@example.com"
+             password: "password")
 
 Task.create!(name:  "task1",
              detail: "task1 is ...",
