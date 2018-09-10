@@ -1,8 +1,9 @@
-<ul class = "task">
-  <li class = "task-id"><%= "No.#{task.id}" %></li>
-  <li class = "task-name"><%= link_to task.name, task %></li>
-  <li class = "task-detail"><%= task.detail %></li>
-  <li class = "task-deadline"><%= task.deadline %></li>
-  <li class = "task-status"><%= task.status %></li>
-  <li class = "task-priority"><%= task.priority %></li>
-</ul>
+<tr>
+  <td class="task-id"><%= task.id %></td>
+  <td class="task-name"><%= link_to task.name, task %></td>
+  <td class="task-detail"><%= task.detail %></td>
+  <td class="task-deadline"><%= task.deadline %></td>
+  <td class="task-status"><%= task.status %></td>
+  <td class="task-priority"><%= task.priority %></td>
+  <td class="task-created_at"><%= task.created_at %></td>
+</tr>

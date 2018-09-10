@@ -1,12 +1,12 @@
 class TasksController < ApplicationController
   helper_method :sort_column, :sort_direction
   before_action :logged_in_user, except: :index
-  before_action :correct_user, except: :index
+  before_action :correct_user, only: [:edit, :update, :destroy]
+  before_action :correct_have_task, only: [:show]
 
   def index
     if logged_in?
-      @user = current_user
-      @tasks = @user.tasks.search(params[:name],params[:status]).order(sort_column + ' ' + sort_direction).page(params[:page]).per(20)
+      @tasks = current_user.tasks.search(params[:name],params[:status]).order(sort_column + ' ' + sort_direction).page(params[:page]).per(20)
     end
   end
 
@@ -15,8 +15,7 @@ class TasksController < ApplicationController
   end
 
   def create
-    @user = current_user
-    @task = @user.tasks.build(task_params)
+    @task = current_user.tasks.build(task_params)
     if @task.save
       flash[:success] = "タスクを登録しました"
       redirect_to root_url

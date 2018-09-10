@@ -8,4 +8,7 @@ Rails.application.routes.draw do
 
   resources :users
   resources :tasks
+  namespace :admin do
+    resources :users
+  end
 end

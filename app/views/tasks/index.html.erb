@@ -2,7 +2,7 @@
 <% if logged_in? %>
   <h1>タスク一覧</h1>
   <div class="new-task">
-    <%= link_to "新規タスクを追加" , "/tasks/new", class: "btn btn-primary"%>
+    <%= link_to "新規タスクを追加" , new_task_path, class: "btn btn-primary"%>
   </div>
   <div class = "search">
     <%= form_tag(root_path, :method => 'get') do %>
@@ -18,8 +18,22 @@
     <%= sortable "deadline", "期限順" %>
     <%= sortable "priority", "優先度順" %>
   </div>
-  <div class = "tasks">
-  <%= render @tasks %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>id</th>
+        <th>タスク名</th>
+        <th>詳細</th>
+        <th>期限日</th>
+        <th>ステータス</th>
+        <th>優先度</th>
+        <th>登録日</th>
+      </tr>
+    </thead>
+    <tbody class=tasks>
+      <%= render @tasks %>
+    </tbody>
+  </table>
   <%= paginate @tasks %>
   </div>
 <% else %>
