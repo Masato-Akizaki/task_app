@@ -1,2 +1,6 @@
-<h1>Tasks#index</h1>
-<p>Find me in app/views/tasks/index.html.erb</p>
+<% provide(:title, 'Task Manegement Tool') %>
+<h1>タスク一覧</h1>
+<div class="new-task">
+  <%= link_to "新規タスクを追加" , new_task_path, class: "btn btn-primary"%>
+</div>
+<%= render @tasks %>
