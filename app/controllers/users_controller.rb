@@ -13,7 +13,7 @@ class UsersController < ApplicationController
       flash[:success] = "ユーザー登録が完了しました！"
       redirect_to root_path
     else
-      redirect_to "new"
+      render "new"
     end
   end
 
