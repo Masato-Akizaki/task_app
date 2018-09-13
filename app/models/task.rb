@@ -1,6 +1,8 @@
 class Task < ApplicationRecord
-  validates :name,   presence: true, length: {maximum: 100}
-  validates :detail, length: {maximum: 1000}
+  belongs_to :user
+  validates :name,    presence: true, length: {maximum: 100}
+  validates :detail,  length: {maximum: 1000}
+  validates :user_id, presence: true
 
   def self.search(name,status)
     if name.blank? && status.blank?

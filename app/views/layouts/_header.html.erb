@@ -1,0 +1,16 @@
+<header class="navbar navbar-fixed-top ">
+  <div>
+    <%= link_to "Task app", root_path, id: "logo" %>
+    <nav>
+      <ul class="nav navbar-nav navbar-right">
+        <% if logged_in? %>
+          <li><%= link_to "タスク一覧", root_path %></li>
+          <li><%= link_to "タスク追加", new_task_path %></li>
+          <li><%= link_to "ログアウト", logout_path, method: :delete %></li>
+        <% else %>
+          <li><%= link_to "ログイン", login_path %></li>
+        <% end %>
+      </ul>
+    </nav>
+  </div>
+</header>

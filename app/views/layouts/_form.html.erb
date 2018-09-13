@@ -1,26 +1,43 @@
-<%= form_for(@task) do |f| %>
-  <%= render 'shared/error_messages' %>
+<%= form_for(form_object) do |f| %>
+  <%= render 'shared/error_messages', form_object: form_object %>
 
   <div class="field">
     <%= f.label :name %>
     <%= f.text_field :name, class: 'form-control' %>
   </div>
-  <div class="area">
-    <%= f.label :detail %>
-    <%= f.text_area :detail, class: 'form-control' %>
-  </div>
-  <div class="date">
-    <%= f.label :deadline %>
-    <%= f.date_field :deadline, class: 'form-control' %>
-  </div>
-  <div class="select">
-    <%= f.label :status %>
-    <%= f.select :status, [["", nil], '未着手', '着手中', '完了'], class: 'form-control' %>
-  </div>
-  <div class="select">
-    <%= f.label :priority %>
-    <%= f.select :priority, ['低', '中', '高'], :selected => "中", class: 'form-control' %>
-  </div>
 
-    <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+  <% if form_object == @task %>
+    <div class="area">
+      <%= f.label :detail %>
+      <%= f.text_area :detail, class: 'form-control' %>
+    </div>
+    <div class="date">
+      <%= f.label :deadline %>
+      <%= f.date_field :deadline, class: 'form-control' %>
+    </div>
+    <div class="select">
+      <%= f.label :status %>
+      <%= f.select :status, [["", nil], '未着手', '着手中', '完了'], class: 'form-control' %>
+    </div>
+    <div class="select">
+      <%= f.label :priority %>
+      <%= f.select :priority, ['低', '中', '高'], :selected => "中", class: 'form-control' %>
+    </div>
+
+  <% elsif form_object == @user %>
+    <div class="field">
+      <%= f.label :email %>
+      <%= f.text_field :email, class: 'form-control' %>
+    </div>
+    <div class="password_field">
+      <%= f.label :password %>
+      <%= f.password_field :password, class: 'form-control' %>
+    </div>
+    <div class="password_field">
+      <%= f.label :password_confirmation %>
+      <%= f.password_field :password_confirmation, class: 'form-control' %>
+    </div>
+  <% end %>
+
+    <%= f.submit button_text, class: "btn btn-primary" %>
 <% end %>

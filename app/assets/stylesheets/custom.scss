@@ -39,3 +39,38 @@ li{
   margin-top: 5px;
 }
 
+
+/* top(not_logged_in) */
+.top {
+  text-align: center;
+  h1{
+    font-size: 50px;
+    margin: 100px;
+  }
+  h4{
+    margin: 50px;
+  }
+}
+
+/* header */
+
+header {
+  height: 50px;
+  background-color: #272836;
+  color: white;
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+#logo {
+  float: left;
+  margin-right: 10px;
+  font-size: 1.7em;
+  color: white;
+  letter-spacing: -1px;
+  padding-top: 9px;
+  &:hover {
+    color: white;
+    text-decoration: none;
+  }
+}
