@@ -1,4 +1,4 @@
 <% provide(:title, 'タスク編集') %>
 <% provide(:button_text, '保存') %>
 <h1>タスク編集</h1>
-<%= render "layouts/form" %>
+<%= render "layouts/form", form_object: @task %>
