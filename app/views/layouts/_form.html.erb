@@ -9,5 +9,10 @@
     <%= f.label :detail %>
     <%= f.text_area :detail, class: 'form-control' %>
   </div>
+  <div class="date">
+    <%= f.label :deadline %>
+    <%= f.date_field :deadline, class: 'form-control' %>
+  </div>
+
     <%= f.submit button_text, class: "btn btn-primary" %>
 <% end %>
