@@ -1,6 +1,15 @@
 User.create!(name: "user1",
-             email: "user1@example.com"
+             email: "user1@example.com",
              password: "password")
+
+10.times do |n|
+name  = "user#{n+2}"
+email = "user#{n+2}@example.com"
+password = "password"
+User.create!(name:  name,
+             email: email,
+             password: password)
+end
 
 Task.create!(name:  "task1",
              detail: "task1 is ...",
@@ -18,17 +27,20 @@ b = (0..32).map{|i| 2+3*i }
 if a.include?(n+2)
   status = "完了"
   priority = "高"
+  user_id = 1
 elsif b.include?(n+2)
   status = "着手中"
   priority = "中"
+  user_id = 2
 else
   status = "未着手"
   priority = "低"
+  user_id = 3
 end
 Task.create!(name:  name,
              detail: detail,
              deadline: deadline,
              status: status,
              priority: priority,
-             user_id: 1)
+             user_id: user_id)
 end
