@@ -1,8 +1,12 @@
+User.create!(name: "user1",
+             email: "user1@example.com")
+
 Task.create!(name:  "task1",
              detail: "task1 is ...",
              deadline: Time.current + 1.days,
-             status: 2
-             priority: 2)
+             status: 2,
+             priority: 2,
+             user_id: 1)
 
 99.times do |n|
 name  = "task#{n+2}"
@@ -24,5 +28,6 @@ Task.create!(name:  name,
              detail: detail,
              deadline: deadline,
              status: status,
-             priority: priority)
+             priority: priority,
+             user_id: 1)
 end

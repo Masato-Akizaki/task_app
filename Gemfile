@@ -7,6 +7,8 @@ ruby '2.5.1'
 gem 'rails', '~> 5.2.1'
 gem 'bootstrap-sass'
 gem 'pg'
+gem 'kaminari'
+gem 'kaminari-bootstrap'
 gem 'enum_help'
 
 # Use Puma as the app server
