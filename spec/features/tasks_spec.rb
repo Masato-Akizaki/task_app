@@ -14,15 +14,23 @@ RSpec.feature "Tasks", type: :feature do
     it "タスクを新規作成できる" do
       fill_in "タスク名",   with: "task1"
       fill_in "詳細", with: "task1 is ..."
+      fill_in "期限日", with: "2018/08/31"
+      select "着手中", from: "ステータス"
       click_button "保存"
 
       expect(page).to have_content "タスクを登録しました"
       expect(page).to have_content "task1"
       expect(page).to have_content "task1 is ..."
+      expect(page).to have_content "2018-08-31"
+      expect(page).to have_content "着手中"
+
 
       task = Task.last
       expect(task.name).to eq "task1"
       expect(task.detail).to eq "task1 is ..."
+      expect(task.deadline).to have_content "2018-08-31"
+      expect(task.status).to have_content "着手中"
+
     end
   end
 
@@ -50,15 +58,22 @@ RSpec.feature "Tasks", type: :feature do
       click_link "編集"
       fill_in "タスク名",   with: "task1-1"
       fill_in "詳細", with: "task1-1 is ..."
+      fill_in "期限日", with: "2018/08/31"
+      select "着手中", from: "ステータス"
       click_button "保存"
 
       expect(page).to have_content "タスクを更新しました"
       expect(page).to have_content "task1-1"
       expect(page).to have_content "task1-1 is ..."
+      expect(page).to have_content "2018-08-31"
+      expect(page).to have_content "着手中"
+
 
       task = Task.find(1)
       expect(task.name).to eq "task1-1"
       expect(task.detail).to eq "task1-1 is ..."
+      expect(task.deadline).to have_content "2018-08-31"
+      expect(task.status).to have_content "着手中"
     end
 
     it "タスクを削除できる" do
@@ -110,6 +125,57 @@ RSpec.feature "Tasks", type: :feature do
       within '.tasks' do
         task_ids = all('.task-id').map(&:text)
         expect(task_ids).to eq %w(No.4 No.2 No.3 No.1)
+      end
+    end
+  end
+
+  describe "タスクを検索" do
+    before do
+      Task.create(id: 1, name: "task1", status: "完了")
+      Task.create(id: 2, name: "task2", status: "未着手")
+      Task.create(id: 3, name: "work3", status: "未着手")
+      visit root_path
+    end
+
+    context "一致するタスク名が見つかるとき" do
+      it "検索文字列に一致するタスクを返す" do
+        fill_in "タスク名",   with: "task1"
+        click_button "検索"
+        expect(page).to have_content "task1"
+        expect(page).to_not have_content "task2"
+        expect(page).to_not have_content "work3"
+      end
+    end
+
+    context "一致するステータスが見つかるとき" do
+      it "選択ステータスに一致するタスクを返す" do
+        select "未着手", from: "ステータス"
+        click_button "検索"
+        expect(page).to_not have_content "task1"
+        expect(page).to have_content "task2"
+        expect(page).to have_content "work3"
+      end
+    end
+
+    context "一致するタスク名とステータスが見つかるとき" do
+      it "検索文字列と選択ステータスに一致するタスクを返す" do
+        fill_in "タスク名",   with: "task"
+        select "未着手", from: "ステータス"
+        click_button "検索"
+        expect(page).to_not have_content "task1"
+        expect(page).to have_content "task2"
+        expect(page).to_not have_content "work3"
+      end
+    end
+
+    context "一致するタスク名とステータスが見つからないとき" do
+      it "空のコレクションを返す" do
+        fill_in "タスク名",   with: "task4"
+        select "着手中", from: "ステータス"
+        click_button "検索"
+        expect(page).to_not have_content "task1"
+        expect(page).to_not have_content "task2"
+        expect(page).to_not have_content "work3"
       end
     end
   end

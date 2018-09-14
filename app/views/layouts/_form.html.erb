@@ -13,6 +13,10 @@
     <%= f.label :deadline %>
     <%= f.date_field :deadline, class: 'form-control' %>
   </div>
+  <div class="select">
+    <%= f.label :status %>
+    <%= f.select :status, [["", nil], '未着手', '着手中', '完了'], class: 'form-control' %>
+  </div>
 
     <%= f.submit button_text, class: "btn btn-primary" %>
 <% end %>
