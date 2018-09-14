@@ -16,6 +16,7 @@ RSpec.feature "Tasks", type: :feature do
       fill_in "詳細", with: "task1 is ..."
       fill_in "期限日", with: "2018/08/31"
       select "着手中", from: "ステータス"
+      select "高", from: "優先度"
       click_button "保存"
 
       expect(page).to have_content "タスクを登録しました"
@@ -23,13 +24,15 @@ RSpec.feature "Tasks", type: :feature do
       expect(page).to have_content "task1 is ..."
       expect(page).to have_content "2018-08-31"
       expect(page).to have_content "着手中"
+      expect(page).to have_content "高"
 
 
       task = Task.last
       expect(task.name).to eq "task1"
       expect(task.detail).to eq "task1 is ..."
       expect(task.deadline).to have_content "2018-08-31"
-      expect(task.status).to have_content "着手中"
+      expect(task.status_i18n).to have_content "着手中"
+      expect(task.priority_i18n).to have_content "高"
 
     end
   end
@@ -60,6 +63,7 @@ RSpec.feature "Tasks", type: :feature do
       fill_in "詳細", with: "task1-1 is ..."
       fill_in "期限日", with: "2018/08/31"
       select "着手中", from: "ステータス"
+      select "高", from: "優先度"
       click_button "保存"
 
       expect(page).to have_content "タスクを更新しました"
@@ -67,13 +71,16 @@ RSpec.feature "Tasks", type: :feature do
       expect(page).to have_content "task1-1 is ..."
       expect(page).to have_content "2018-08-31"
       expect(page).to have_content "着手中"
+      expect(page).to have_content "高"
 
 
       task = Task.find(1)
       expect(task.name).to eq "task1-1"
       expect(task.detail).to eq "task1-1 is ..."
       expect(task.deadline).to have_content "2018-08-31"
-      expect(task.status).to have_content "着手中"
+      expect(task.status_i18n).to have_content "着手中"
+      expect(task.priority_i18n).to have_content "高"
+
     end
 
     it "タスクを削除できる" do
@@ -131,9 +138,9 @@ RSpec.feature "Tasks", type: :feature do
 
   describe "タスクを検索" do
     before do
-      Task.create(id: 1, name: "task1", status: "完了")
-      Task.create(id: 2, name: "task2", status: "未着手")
-      Task.create(id: 3, name: "work3", status: "未着手")
+      Task.create(id: 1, name: "task1", status: "completed")
+      Task.create(id: 2, name: "task2", status: "waiting")
+      Task.create(id: 3, name: "work3", status: "waiting")
       visit root_path
     end
 
