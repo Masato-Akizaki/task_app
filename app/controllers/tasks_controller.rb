@@ -1,7 +1,6 @@
 class TasksController < ApplicationController
   helper_method :sort_column, :sort_direction
   before_action :require_login, except: :index
-  #before_action :correct_user, except: :index
 
   def index
     if logged_in?
