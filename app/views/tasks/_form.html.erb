@@ -1,6 +1,4 @@
-<%= form_for(form_object) do |f| %>
-  <%= render 'shared/error_messages', form_object: form_object %>
-
+<%= form_for(@task) do |f| %>
   <div class="field">
     <%= f.label :name %>
     <%= f.text_field :name, class: 'form-control' %>
@@ -9,5 +7,5 @@
     <%= f.label :detail %>
     <%= f.text_area :detail, class: 'form-control' %>
   </div>
-    <%= f.submit button_text, class: "btn btn-primary" %>
+    <%= f.submit yield(:button_text), class: "btn btn-primary" %>
 <% end %>
