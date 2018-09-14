@@ -15,11 +15,11 @@
   </div>
   <div class="select">
     <%= f.label :status %>
-    <%= f.select :status, [["", nil], '未着手', '着手中', '完了'], class: 'form-control' %>
+    <%= f.select :status, Task.statuses.map{ |k,v| [Task.statuses_i18n[k], k] }, { include_blank: "" }, class: 'form-control' %>
   </div>
   <div class="select">
     <%= f.label :priority %>
-    <%= f.select :priority, ['低', '中', '高'], :selected => "中", class: 'form-control' %>
+    <%= f.select :priority, Task.priorities.map{ |k,v| [Task.priorities_i18n[k], k] }, {}, :selected => "中", class: 'form-control' %>
   </div>
 
     <%= f.submit yield(:button_text), class: "btn btn-primary" %>

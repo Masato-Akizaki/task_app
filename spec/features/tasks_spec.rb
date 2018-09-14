@@ -31,8 +31,8 @@ RSpec.feature "Tasks", type: :feature do
       expect(task.name).to eq "task1"
       expect(task.detail).to eq "task1 is ..."
       expect(task.deadline).to have_content "2018-08-31"
-      expect(task.status).to have_content "着手中"
-      expect(task.priority).to have_content "高"
+      expect(task.status_i18n).to have_content "着手中"
+      expect(task.priority_i18n).to have_content "高"
 
     end
   end
@@ -78,8 +78,8 @@ RSpec.feature "Tasks", type: :feature do
       expect(task.name).to eq "task1-1"
       expect(task.detail).to eq "task1-1 is ..."
       expect(task.deadline).to have_content "2018-08-31"
-      expect(task.status).to have_content "着手中"
-      expect(task.priority).to have_content "高"
+      expect(task.status_i18n).to have_content "着手中"
+      expect(task.priority_i18n).to have_content "高"
 
     end
 
@@ -138,9 +138,9 @@ RSpec.feature "Tasks", type: :feature do
 
   describe "タスクを検索" do
     before do
-      Task.create(id: 1, name: "task1", status: "完了")
-      Task.create(id: 2, name: "task2", status: "未着手")
-      Task.create(id: 3, name: "work3", status: "未着手")
+      Task.create(id: 1, name: "task1", status: "completed")
+      Task.create(id: 2, name: "task2", status: "waiting")
+      Task.create(id: 3, name: "work3", status: "waiting")
       visit root_path
     end
 

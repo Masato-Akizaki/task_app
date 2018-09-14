@@ -8,7 +8,7 @@
     <%= label_tag :name, "タスク名" %>
     <%= text_field_tag :name %>
     <%= label_tag :status, "ステータス" %>
-    <%= select_tag :status, options_for_select([["", nil],["未着手","未着手"],["着手中","着手中"],["完了","完了"]]) %>
+    <%= select_tag :status, options_for_select(Task.statuses_i18n.values.to_a), { include_blank: "" } %>
     <%= submit_tag '検索', :name => nil %>
   <% end %>
 </div>

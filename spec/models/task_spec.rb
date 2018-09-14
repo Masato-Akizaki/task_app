@@ -11,9 +11,9 @@ RSpec.describe Task, type: :model do
 
   describe "search task" do
     before do
-      @task1 = Task.create(id: 1, name: "task1", status: "完了")
-      @task2 = Task.create(id: 2, name: "task2", status: "未着手")
-      @task3 = Task.create(id: 3, name: "work3", status: "未着手")
+      @task1 = Task.create(id: 1, name: "task1", status: "completed")
+      @task2 = Task.create(id: 2, name: "task2", status: "waiting")
+      @task3 = Task.create(id: 3, name: "work3", status: "waiting")
     end
 
     context "一致するタスク名が見つかるとき" do
