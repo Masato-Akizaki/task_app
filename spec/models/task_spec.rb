@@ -12,9 +12,9 @@ RSpec.describe Task, type: :model do
   describe "search task" do
     before do
       User.create!(id: 1, name: 'user1', email: 'user1@example.com')
-      @task1 = Task.create(id: 1, name: "task1", status: "完了", user_id: 1)
-      @task2 = Task.create(id: 2, name: "task2", status: "未着手", user_id: 1)
-      @task3 = Task.create(id: 3, name: "work3", status: "未着手", user_id: 1)
+      @task1 = Task.create(id: 1, name: "task1", status: "completed", user_id: 1)
+      @task2 = Task.create(id: 2, name: "task2", status: "waiting", user_id: 1)
+      @task3 = Task.create(id: 3, name: "work3", status: "waiting", user_id: 1)
     end
 
     context "一致するタスク名が見つかるとき" do

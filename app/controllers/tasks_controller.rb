@@ -2,7 +2,7 @@ class TasksController < ApplicationController
   helper_method :sort_column, :sort_direction
 
   def index
-    @tasks = Task.search(params[:name],params[:status]).order(sort_column + ' ' + sort_direction).page(params[:page]).per(20)
+    @tasks = Task.search(params[:name],params[:status]).order("#{sort_column}" => sort_direction).page(params[:page]).per(20)
   end
 
   def new
@@ -40,9 +40,14 @@ class TasksController < ApplicationController
 
   def destroy
     @task = Task.find_by(id: params[:id])
-    @task.destroy
-    flash[:success] = "タスクを削除しました"
-    redirect_to root_url
+    if @task.nil?
+      redirect_to root_url
+    elsif @task.destroy
+      flash[:success] = "タスクを削除しました"
+      redirect_to root_url
+    else
+      redirect_to root_url
+    end
   end
 
   private

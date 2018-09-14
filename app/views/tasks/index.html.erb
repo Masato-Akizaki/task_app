@@ -1,14 +1,14 @@
 <% provide(:title, 'Task Manegement Tool') %>
 <h1>タスク一覧</h1>
 <div class="new-task">
-  <%= link_to "新規タスクを追加" , "/tasks/new", class: "btn btn-primary"%>
+  <%= link_to "新規タスクを追加" , new_task_path, class: "btn btn-primary"%>
 </div>
 <div class = "search">
   <%= form_tag(root_path, :method => 'get') do %>
     <%= label_tag :name, "タスク名" %>
     <%= text_field_tag :name %>
     <%= label_tag :status, "ステータス" %>
-    <%= select_tag :status, options_for_select([["", nil],["未着手","未着手"],["着手中","着手中"],["完了","完了"]]) %>
+    <%= select_tag :status, options_for_select(Task.statuses_i18n.values.to_a), { include_blank: "" } %>
     <%= submit_tag '検索', :name => nil %>
   <% end %>
 </div>
@@ -21,4 +21,3 @@
 <%= render @tasks %>
 <%= paginate @tasks %>
 </div>
-
