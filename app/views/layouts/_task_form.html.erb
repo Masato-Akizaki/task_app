@@ -1,0 +1,26 @@
+<%= form_for(task) do |f| %>
+  <%= render 'shared/error_messages', form_object: task %>
+
+  <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name, class: 'form-control' %>
+  </div>
+  <div class="area">
+    <%= f.label :detail %>
+    <%= f.text_area :detail, class: 'form-control' %>
+  </div>
+  <div class="date">
+    <%= f.label :deadline %>
+    <%= f.date_field :deadline, class: 'form-control' %>
+  </div>
+  <div class="select">
+    <%= f.label :status %>
+    <%= f.select :status, Task.statuses.map{ |k,v| [Task.statuses_i18n[k], k] }, { include_blank: "" }, class: 'form-control' %>
+  </div>
+  <div class="select">
+    <%= f.label :priority %>
+    <%= f.select :priority, Task.priorities.map{ |k,v| [Task.priorities_i18n[k], k] }, {}, :selected => "中", class: 'form-control' %>
+  </div>
+
+  <%= f.submit button_text, class: "btn btn-primary" %>
+<% end %>
