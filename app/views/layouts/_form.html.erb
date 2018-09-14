@@ -1,5 +1,5 @@
-<%= form_for(@task) do |f| %>
-  <%= render 'shared/error_messages' %>
+<%= form_for(form_object) do |f| %>
+  <%= render 'shared/error_messages', form_object: form_object %>
 
   <div class="field">
     <%= f.label :name %>
@@ -14,5 +14,5 @@
     <%= f.date_field :deadline, class: 'form-control' %>
   </div>
 
-    <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+    <%= f.submit button_text, class: "btn btn-primary" %>
 <% end %>
