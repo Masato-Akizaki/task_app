@@ -3,7 +3,7 @@
   <td class="task-name"><%= link_to task.name, task %></td>
   <td class="task-detail"><%= task.detail %></td>
   <td class="task-deadline"><%= task.deadline %></td>
-  <td class="task-status"><%= task.status %></td>
-  <td class="task-priority"><%= task.priority %></td>
+  <li class="task-status"><%= task.status_i18n %></li>
+  <li class="task-priority"><%= task.priority_i18n %></li>
   <td class="task-created_at"><%= task.created_at %></td>
 </tr>
