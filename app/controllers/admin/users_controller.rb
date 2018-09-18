@@ -40,9 +40,12 @@ class Admin::UsersController < ApplicationController
   end
 
   def destroy
-    @user = User.find(params[:id])
+    @user = User.find_by(id: params[:id])
     if @user&.destroy
       flash[:success] = "ユーザーを削除しました"
+      redirect_to admin_users_path
+    elsif @user.nil?
+      flash[:danger] = "ユーザーが存在しませんでした"
       redirect_to admin_users_path
     else
       @tasks = User.find(params[:id]).tasks.order(created_at: :desc).page(params[:page]).per(20)

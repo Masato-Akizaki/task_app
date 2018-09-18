@@ -13,7 +13,7 @@ class User < ApplicationRecord
   private
 
   def least_one_admin_user
-    if User.where(admin: 1).count == 1
+    if User.find(self.id).admin? && User.where(admin: 1).count == 1
       errors.add :base, "少なくとも1つ、管理ユーザーが必要です" 
       throw :abort
     end
