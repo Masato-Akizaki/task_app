@@ -1,8 +1,11 @@
 class TasksController < ApplicationController
   helper_method :sort_column, :sort_direction
+  before_action :require_login, except: :index
 
   def index
-    @tasks = Task.search(params[:name],params[:status]).order("#{sort_column}" => sort_direction).page(params[:page]).per(20)
+    if logged_in?
+      @tasks = current_user.tasks.search(params[:name], params[:status]).order("#{sort_column}" => sort_direction).page(params[:page]).per(20)
+    end
   end
 
   def new
@@ -10,8 +13,7 @@ class TasksController < ApplicationController
   end
 
   def create
-    @user = User.first #ログイン機能作成後、ログインユーザーのid参照に変更 
-    @task = @user.tasks.build(task_params)
+    @task = current_user.tasks.build(task_params)
     if @task.save
       flash[:success] = "タスクを登録しました"
       redirect_to root_url

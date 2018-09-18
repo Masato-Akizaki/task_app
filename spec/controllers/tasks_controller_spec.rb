@@ -59,8 +59,9 @@ RSpec.describe TasksController, type: :controller do
 
   describe "GET #new" do
     it "returns a success response" do
+      Task.new! valid_attributes
       get :new, params: {}, session: valid_session
-      expect(response).to be_successful
+      expect(response.status).to eq 200
     end
   end
 

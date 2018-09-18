@@ -9,6 +9,7 @@ gem 'bootstrap-sass'
 gem 'pg'
 gem 'kaminari'
 gem 'kaminari-bootstrap'
+gem 'bcrypt'
 gem 'enum_help'
 
 # Use Puma as the app server

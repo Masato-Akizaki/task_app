@@ -1,23 +1,31 @@
-<% provide(:title, 'Task Manegement Tool') %>
-<h1>タスク一覧</h1>
-<div class="new-task">
-  <%= link_to "新規タスクを追加" , new_task_path, class: "btn btn-primary"%>
+<% provide(:title, 'Task Manegement App') %>
+<% if logged_in? %>
+  <h1>タスク一覧</h1>
+  <div class="new-task">
+    <%= link_to "新規タスクを追加" , new_task_path, class: "btn btn-primary"%>
+  </div>
+  <div class = "search">
+    <%= form_tag(root_path, :method => 'get') do %>
+      <%= label_tag :name, "タスク名" %>
+      <%= text_field_tag :name %>
+      <%= label_tag :status, "ステータス" %>
+      <%= select_tag :status, options_for_select(Task.statuses_i18n.values.to_a), { include_blank: "" } %>
+      <%= submit_tag '検索', :name => nil %>
+    <% end %>
+  </div>
+  <div class = "sort">
+    <%= sortable "created_at", "作成順" %>
+    <%= sortable "deadline", "期限順" %>
+    <%= sortable "priority", "優先度順" %>
+  </div>
+  <div class = "tasks">
+  <%= render @tasks %>
+  <%= paginate @tasks %>
+  </div>
+<% else %>
+  <div class = "top">
+    <h1>Task Manegement App</h1>
+    <h4>タスクを管理するアプリケーションです。</h4>
+    <%= link_to "新規ユーザー登録", signup_path, class: "btn btn-primary b" %>
 </div>
-<div class = "search">
-  <%= form_tag(root_path, :method => 'get') do %>
-    <%= label_tag :name, "タスク名" %>
-    <%= text_field_tag :name %>
-    <%= label_tag :status, "ステータス" %>
-    <%= select_tag :status, options_for_select(Task.statuses_i18n.values.to_a), { include_blank: "" } %>
-    <%= submit_tag '検索', :name => nil %>
-  <% end %>
-</div>
-<div class = "sort">
-  <%= sortable "created_at", "作成順" %>
-  <%= sortable "deadline", "期限順" %>
-  <%= sortable "priority", "優先度順" %>
-</div>
-<div class = "tasks">
-<%= render @tasks %>
-<%= paginate @tasks %>
-</div>
+<% end %>

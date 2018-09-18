@@ -59,3 +59,13 @@ RSpec.configure do |config|
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
 end
+
+
+def login_user1
+  User.create!(id: 1, name: 'user1', email: 'user1@example.com', password: 'password')
+  visit root_path
+  click_link "ログイン"
+  fill_in "メールアドレス",   with: "user1@example.com"
+  fill_in "パスワード",   with: "password"
+  click_button "ログイン"
+end
