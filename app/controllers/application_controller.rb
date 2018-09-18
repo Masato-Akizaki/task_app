@@ -3,16 +3,11 @@ class ApplicationController < ActionController::Base
 
 private
 
-  def logged_in_user
+  def require_login
     unless logged_in?
       flash[:danger] = "ログインして下さい"
       redirect_to login_url
     end
-  end
-
-  def correct_user
-    @user = User.find_by(id: params[:id])
-    redirect_to(root_url) unless current_user?(@user)
   end
 
   #現在のユーザーのタスクか検証

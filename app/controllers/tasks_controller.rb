@@ -1,12 +1,11 @@
 class TasksController < ApplicationController
   helper_method :sort_column, :sort_direction
-  before_action :logged_in_user, except: :index
-  before_action :correct_user, only: [:edit, :update, :destroy]
+  before_action :require_login, except: :index
   before_action :correct_have_task, only: [:show]
 
   def index
     if logged_in?
-      @tasks = current_user.tasks.search(params[:name],params[:status]).order(sort_column + ' ' + sort_direction).page(params[:page]).per(20)
+      @tasks = current_user.tasks.search(params[:name], params[:status]).order("#{sort_column}" => sort_direction).page(params[:page]).per(20)
     end
   end
 
@@ -44,9 +43,14 @@ class TasksController < ApplicationController
 
   def destroy
     @task = Task.find_by(id: params[:id])
-    @task.destroy
-    flash[:success] = "タスクを削除しました"
-    redirect_to root_url
+    if @task.nil?
+      redirect_to root_url
+    elsif @task.destroy
+      flash[:success] = "タスクを削除しました"
+      redirect_to root_url
+    else
+      redirect_to root_url
+    end
   end
 
   private

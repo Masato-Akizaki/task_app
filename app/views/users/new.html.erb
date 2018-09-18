@@ -1,4 +1,4 @@
 <% provide(:title, '新規ユーザー登録') %>
 <h1>新規ユーザー登録</h1>
-<%= render "layouts/user_form" , button_text: '登録' %>
+<%= render "layouts/user_form", button_text: '登録', user: @user %>
 <p>既に登録しているユーザーは<%= link_to "こちら", login_path%>からログイン</p>

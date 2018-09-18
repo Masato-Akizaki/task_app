@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
-  before_action :logged_in_user, only: [:index, :show, :edit, :update, :destroy]
-  before_action :correct_user, only: [:show, :edit, :update, :destroy]
+  before_action :require_login, only: [:index, :show, :edit, :update, :destroy]
 
   def new
     @user = User.new
@@ -15,9 +14,6 @@ class UsersController < ApplicationController
     else
       render "new"
     end
-  end
-
-  def index
   end
 
   def show
