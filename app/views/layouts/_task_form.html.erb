@@ -22,5 +22,5 @@
     <%= f.select :priority, Task.priorities.map{ |k,v| [Task.priorities_i18n[k], k] }, {}, :selected => "中", class: 'form-control' %>
   </div>
 
-    <%= f.submit button_text, class: "btn btn-primary" %>
+  <%= f.submit button_text, class: "btn btn-primary" %>
 <% end %>

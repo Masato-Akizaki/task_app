@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
-  before_action :logged_in_user, only: [:index, :show, :edit, :update, :destroy]
-  before_action :correct_user, only: [:show, :edit, :update, :destroy]
+  before_action :require_login, only: [:index, :show, :edit, :update, :destroy]
 
   def new
     @user = User.new
@@ -13,11 +12,8 @@ class UsersController < ApplicationController
       flash[:success] = "ユーザー登録が完了しました！"
       redirect_to root_path
     else
-      redirect_to "new"
+      render "new"
     end
-  end
-
-  def index
   end
 
   def show
