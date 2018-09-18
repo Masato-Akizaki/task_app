@@ -1,5 +1,6 @@
 class Admin::UsersController < ApplicationController
-  before_action :logged_in_user
+  before_action  :logged_in_user
+  before_action  :admin_user
   
   def new
     @user = User.new
@@ -11,12 +12,12 @@ class Admin::UsersController < ApplicationController
       flash[:success] = "ユーザー登録が完了しました"
       redirect_to admin_users_path
     else
-      redirect_to "new"
+      render "new"
     end
   end
 
   def index
-    @users =User.all.order(created_at: :desc).page(params[:page]).per(50)
+    @users = User.all.order(created_at: :desc).page(params[:page]).per(50)
   end
 
   def show
@@ -32,22 +33,35 @@ class Admin::UsersController < ApplicationController
     @user = User.find_by(id: params[:id])
     if @user.update_attributes(user_params)
       flash[:success] = "プロフィールを更新しました"
-      redirect_to admin_user_path(@user.id)
+      redirect_to admin_users_path
     else
       render 'edit'
     end
   end
 
   def destroy
-    User.find(params[:id]).destroy
-    flash[:success] = "ユーザーを削除しました"
-    redirect_to admin_users_path
+    @user = User.find_by(id: params[:id])
+    if @user&.destroy
+      flash[:success] = "ユーザーを削除しました"
+      redirect_to admin_users_path
+    elsif @user.nil?
+      flash[:danger] = "ユーザーが存在しませんでした"
+      redirect_to admin_users_path
+    else
+      @tasks = User.find(params[:id]).tasks.order(created_at: :desc).page(params[:page]).per(20)
+      render "show"
+    end
   end
 
   private
 
     def user_params
       params.require(:user).permit(:name, :email, :password,
-                                  :password_confirmation)
+                                  :password_confirmation, :admin)
     end
+
+    def admin_user
+      redirect_to(root_url) unless current_user.admin?
+    end
+
 end

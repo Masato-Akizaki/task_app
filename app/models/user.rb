@@ -8,4 +8,15 @@ class User < ApplicationRecord
                     uniqueness: {case_sensitive: false}
   has_secure_password
   validates :password, presence: true, length: {minimum: 6}
+  before_destroy :least_one_admin_user, prepend: true
+
+  private
+
+  def least_one_admin_user
+    if User.find(self.id).admin? && User.where(admin: 1).count == 1
+      errors.add :base, "少なくとも1つ、管理ユーザーが必要です" 
+      throw :abort
+    end
+  end
+
 end
