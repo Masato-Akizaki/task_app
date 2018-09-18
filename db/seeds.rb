@@ -1,6 +1,7 @@
 User.create!(name: "user1",
              email: "user1@example.com",
-             password: "password")
+             password: "password",
+             admin: true)
 
 10.times do |n|
 name  = "user#{n+2}"

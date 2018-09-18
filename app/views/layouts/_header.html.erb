@@ -6,7 +6,9 @@
         <% if logged_in? %>
           <li><%= link_to "タスク一覧", root_path %></li>
           <li><%= link_to "タスク追加", new_task_path %></li>
-          <li><%= link_to "ユーザー管理", admin_users_path %></li>
+          <% #if current_user.admin? %>
+            <li><%= link_to "ユーザー管理", admin_users_path %></li>
+          <% #end %>
           <li><%= link_to "ログアウト", logout_path, method: :delete %></li>
         <% else %>
           <li><%= link_to "ログイン", login_path %></li>

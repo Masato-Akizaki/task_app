@@ -1,5 +1,6 @@
 <% provide(:title, @user.name) %>
 <h2 class="admin">【管理画面】</h2>
+<%= render 'shared/user_error_messages' %>
 <h1><%= @user.name %></h1>
 <div class="new-task">
     <%= link_to "編集" , edit_admin_user_path, class: "btn btn-primary"%>
