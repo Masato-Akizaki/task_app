@@ -8,4 +8,7 @@ Rails.application.routes.draw do
 
   resources :users, except: :index 
   resources :tasks, except: :index
+  namespace :admin do
+    resources :users
+  end
 end

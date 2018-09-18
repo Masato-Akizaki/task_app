@@ -2,3 +2,27 @@
 <h1>
   <%= @user.name %>
 </h1>
+<table class="table">
+  <tbody>
+    <tr>
+      <td>id</td>
+      <td><%= @user.id %></td>
+    </tr>
+    <tr>
+      <td>ユーザー名</td>
+      <td><%= @user.name %></td>
+    </tr>
+    <tr>
+      <td>メールアドレス</td>
+      <td><%= @user.email %></td>
+    </tr>
+    <tr>
+      <td>タスク数</td>
+      <td><%= @user.tasks.count %></td>
+    </tr>
+    <tr>
+      <td>登録日</td>
+      <td><%= @user.created_at %></td>
+    </tr>
+  </tbody>
+</table>

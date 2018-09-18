@@ -109,7 +109,7 @@ RSpec.feature "Tasks", type: :feature do
     it 'デフォルトがcreated_at降順で表示' do
       within '.tasks' do
         task_ids = all('.task-id').map(&:text)
-        expect(task_ids).to eq %w(No.4 No.3 No.2 No.1)
+        expect(task_ids).to eq %w(4 3 2 1)
       end
     end
 
@@ -117,7 +117,7 @@ RSpec.feature "Tasks", type: :feature do
       click_link "作成順"
       within '.tasks' do
         task_ids = all('.task-id').map(&:text)
-        expect(task_ids).to eq %w(No.1 No.2 No.3 No.4)
+        expect(task_ids).to eq %w(1 2 3 4)
       end
     end
 
@@ -125,7 +125,7 @@ RSpec.feature "Tasks", type: :feature do
       click_link "期限順"
       within '.tasks' do
         task_ids = all('.task-id').map(&:text)
-        expect(task_ids).to eq %w(No.1 No.3 No.2 No.4)
+        expect(task_ids).to eq %w(1 3 2 4)
       end
     end
 
@@ -134,7 +134,7 @@ RSpec.feature "Tasks", type: :feature do
       click_link "期限順"
       within '.tasks' do
         task_ids = all('.task-id').map(&:text)
-        expect(task_ids).to eq %w(No.4 No.2 No.3 No.1)
+        expect(task_ids).to eq %w(4 2 3 1)
       end
     end
   end

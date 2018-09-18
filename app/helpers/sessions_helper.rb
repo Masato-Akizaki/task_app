@@ -22,4 +22,18 @@ module SessionsHelper
   def current_user?(user)
     user == current_user
   end
+
+  def current_have_task
+    if session[:user_id]
+      @current_have_task ||= Task.find_by(user_id: session[:user_id])
+    end
+  end
+
+  def current_have_task?(task)
+    if task.nil?
+      redirect_to(root_url)
+    else
+      task.user_id == current_have_task.user_id
+    end
+  end
 end
