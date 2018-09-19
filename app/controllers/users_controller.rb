@@ -37,7 +37,11 @@ class UsersController < ApplicationController
     if @user&.destroy
       flash[:success] = "アカウントを削除しました"
       redirect_to admin_users_path
+    elsif @user.nil?
+      flash[:danger] = "ユーザーが存在しませんでした"
+      redirect_to admin_users_path
     else
+      @tasks = User.find(params[:id]).tasks.order(created_at: :desc).page(params[:page]).per(20)
       render "show"
     end
   end
