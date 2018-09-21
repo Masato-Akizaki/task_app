@@ -1,0 +1,17 @@
+<% provide(:title, 'ラベル一覧') %>
+<h1>ラベル一覧</h1>
+<div class="new-task">
+    <%= link_to "新規ラベルを追加" , new_label_path, class: "btn btn-primary"%>
+  </div>
+<table class="table">
+  <thead>
+    <tr>
+      <th class="label-id">id</th>
+      <th class="label-name">ラベル名</th>
+    </tr>
+  </thead>
+  <tbody class="labels">
+    <%= render @labels %>
+  </tbody>
+</table>
+<%= paginate @labels %>

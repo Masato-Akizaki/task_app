@@ -21,6 +21,11 @@
     <%= f.label :priority %>
     <%= f.select :priority, Task.priorities.map{ |k,v| [Task.priorities_i18n[k], k] }, {}, :selected => "中", class: 'form-control' %>
   </div>
+  <div class="check_box">
+    <%= f.label :labels %>
+    <%= f.collection_check_boxes(:label_ids, Label.all, :id, :name) %>
+  
+  </div>
 
   <%= f.submit button_text, class: "btn btn-primary" %>
 <% end %>

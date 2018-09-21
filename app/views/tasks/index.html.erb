@@ -10,6 +10,8 @@
       <%= text_field_tag :name %>
       <%= label_tag :status, "ステータス" %>
       <%= select_tag :status, options_for_select(Task.statuses_i18n.values.to_a), { include_blank: "" } %>
+      <%= label_tag :labels, "ラベル" %>
+      <%= select_tag :labels, options_for_select(Label.pluck(:name)), { include_blank: "" } %>
       <%= submit_tag '検索', :name => nil %>
     <% end %>
   </div>
@@ -28,6 +30,7 @@
         <th class="task-status">ステータス</th>
         <th class="task-priority">優先度</th>
         <th class="task-created_at">登録日</th>
+        <th class="task-label">ラベル</th>
       </tr>
     </thead>
     <tbody class="tasks">
@@ -35,7 +38,6 @@
     </tbody>
   </table>
   <%= paginate @tasks %>
-  </div>
 <% else %>
   <div class = "top">
     <h1>Task Manegement App</h1>

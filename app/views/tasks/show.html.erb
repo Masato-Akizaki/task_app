@@ -4,14 +4,39 @@
     <%= link_to "編集" , edit_task_path, class: "btn btn-primary"%>
     <%= link_to "削除" , task_path, method: :delete, class: "btn btn-primary btn-2" %>
   </div>
-    <div class="tasks">
-      <ul>
-        <li><%= @task.id %></li>
-        <li><%= @task.name %></li>
-        <li><%= @task.detail %></li>
-        <li><%= @task.deadline %></li>
-        <li><%= @task.status_i18n %></li>
-        <li><%= @task.priority_i18n %></li>
-      </ul>
-    </div>
-  </div>
+  <table class="table">
+  <tbody>
+    <tr>
+      <td>id</td>
+      <td><%= @task.id %></td>
+    </tr>
+    <tr>
+      <td>タスク名</td>
+      <td><%= @task.name %></td>
+    </tr>
+    <tr>
+      <td>詳細</td>
+      <td><%= @task.detail %></td>
+    </tr>
+    <tr>
+      <td>期限日</td>
+      <td><%= @task.deadline %></td>
+    </tr>
+    <tr>
+      <td>ステータス</td>
+      <td><%= @task.status_i18n %></td>
+    </tr>
+    <tr>
+      <td>優先度</td>
+      <td><%= @task.priority_i18n %></td>
+    </tr>
+    <tr>
+      <td>ラベル</td>
+      <td>
+        <% @task.task_labels.each do |l| %>
+          <%= l.label.name %>,
+        <% end %>
+      </td>
+    </tr>
+  </tbody>
+</table>

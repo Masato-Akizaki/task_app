@@ -6,4 +6,9 @@
   <td class="task-status"><%= task.status_i18n %></td>
   <td class="task-priority"><%= task.priority_i18n %></td>
   <td class="task-created_at"><%= task.created_at %></td>
+  <td class="task-label">
+    <% task.task_labels.each do |l| %>
+      <%= l.label.name %>,
+    <% end %>
+  </td>
 </tr>
