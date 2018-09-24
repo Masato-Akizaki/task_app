@@ -8,7 +8,7 @@ RSpec.describe "tasks/new", type: :view do
   it "renders new task form" do
     render
 
-    assert_select "form[action=?][method=?]", tasks_path, "post" do
+    assert_select "form[action=?][method=?]", new_task_path, "post" do
     end
   end
 end
