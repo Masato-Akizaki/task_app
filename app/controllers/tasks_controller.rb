@@ -37,7 +37,7 @@ class TasksController < ApplicationController
       flash[:success] = "タスクを更新しました"
       redirect_to task_url(id: params[:id])
     else
-      render 'edit'
+      render "edit"
     end
   end
 
