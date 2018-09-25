@@ -5,7 +5,7 @@ class TasksController < ApplicationController
 
   def index
     if logged_in?
-      @tasks = current_user.tasks.search(params[:name], params[:status]).order("#{sort_column}" => sort_direction).page(params[:page]).per(20)
+      @tasks = current_user.tasks.search(params[:name], params[:status], params[:labels]).order("#{sort_column}" => sort_direction).page(params[:page]).per(20)
     end
   end
 
@@ -35,7 +35,7 @@ class TasksController < ApplicationController
     @task = Task.find(params[:id])
     if @task.update_attributes(task_params)
       flash[:success] = "タスクを更新しました"
-      redirect_to root_url
+      redirect_to task_url(id: params[:id])
     else
       render 'edit'
     end
@@ -56,7 +56,7 @@ class TasksController < ApplicationController
   private
 
     def task_params
-      params.require(:task).permit(:name, :detail, :deadline, :status, :priority)
+      params.require(:task).permit(:name, :detail, :deadline, :status, :priority, {  label_ids: [] })
     end
 
     def sort_direction

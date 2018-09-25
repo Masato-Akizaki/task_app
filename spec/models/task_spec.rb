@@ -19,28 +19,28 @@ RSpec.describe Task, type: :model do
 
     context "一致するタスク名が見つかるとき" do
       it "検索文字列に一致するタスクを返す" do
-        expect(Task.search("task1","")).to include(@task1)
-        expect(Task.search("task1","")).to_not include(@task2, @task3)
+        expect(Task.search("task1","","")).to include(@task1)
+        expect(Task.search("task1","","")).to_not include(@task2, @task3)
       end
     end
 
     context "一致するステータスが見つかるとき" do
       it "選択ステータスに一致するタスクを返す" do
-        expect(Task.search("","未着手")).to include(@task2, @task3)
-        expect(Task.search("","未着手")).to_not include(@task1)
+        expect(Task.search("","未着手","")).to include(@task2, @task3)
+        expect(Task.search("","未着手","")).to_not include(@task1)
       end
     end
 
     context "一致するタスク名とステータスが見つかるとき" do
       it "検索文字列と選択ステータスに一致するタスクを返す" do
-        expect(Task.search("task","未着手")).to include(@task2)
-        expect(Task.search("task","未着手")).to_not include(@task1, @task3)
+        expect(Task.search("task","未着手","")).to include(@task2)
+        expect(Task.search("task","未着手","")).to_not include(@task1, @task3)
       end
     end
 
     context "一致するタスク名とステータスが見つからないとき" do
       it "空のコレクションを返す" do
-      expect(Task.search("task4","着手中")).to be_empty
+      expect(Task.search("task4","着手中","")).to be_empty
       end
     end
   end

@@ -8,6 +8,7 @@ ja:
         deadline: 期限日
         status: ステータス
         priority: 優先度
+        labels: ラベル
       user:
         name: ユーザー名
         email: メールアドレス
@@ -17,6 +18,8 @@ ja:
       session:
         email: メールアドレス
         password: パスワード
+      label:
+        name: ラベル名
     errors:
       messages:
         record_invalid: "バリデーションに失敗しました: %{errors}"
