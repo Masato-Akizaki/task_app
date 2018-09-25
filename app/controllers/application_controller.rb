@@ -2,10 +2,10 @@ class ApplicationController < ActionController::Base
   include SessionsHelper
 
   # 例外処理
-#rescue_from Exception, with: :render_500
-#rescue_from ActiveRecord::RecordNotFound, with: :render_404
-#rescue_from ActionController::RoutingError, with: :render_404
-#rescue_from NoMethodError, with: :render_404
+rescue_from Exception, with: :render_500
+rescue_from ActiveRecord::RecordNotFound, with: :render_404
+rescue_from ActionController::RoutingError, with: :render_404
+rescue_from NoMethodError, with: :render_404
 
 def render_403
   render template: 'errors/error_403', status: 403, layout: 'application', content_type: 'text/html'
