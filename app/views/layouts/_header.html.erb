@@ -6,6 +6,8 @@
         <% if logged_in? %>
           <li><%= link_to "タスク一覧", root_path %></li>
           <li><%= link_to "タスク追加", new_task_path %></li>
+          <li><%= link_to "ラベル一覧", labels_path %></li>
+          <li><%= link_to "ラベル追加", new_label_path %></li>
           <% if current_user.admin? %>
             <li><%= link_to "ユーザー管理", admin_users_path %></li>
           <% end %>

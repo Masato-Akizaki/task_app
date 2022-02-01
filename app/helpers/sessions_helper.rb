@@ -31,7 +31,7 @@ module SessionsHelper
 
   def current_have_task?(task)
     if task.nil?
-      redirect_to(root_url)
+      render_404
     else
       task.user_id == current_have_task.user_id
     end

@@ -1,0 +1,18 @@
+<% provide(:title, @label.name) %>
+<h1><%= @label.name %></h1>
+<div class="new-task">
+    <%= link_to "編集" , edit_label_path, class: "btn btn-primary"%>
+    <%= link_to "削除" , label_path, method: :delete, class: "btn btn-primary btn-2" %>
+  </div>
+<table class="table">
+  <tbody>
+    <tr>
+      <td>id</td>
+      <td><%= @label.id %></td>
+    </tr>
+    <tr>
+      <td>ラベル名</td>
+      <td><%= @label.name %></td>
+    </tr>
+  </tbody>
+</table>

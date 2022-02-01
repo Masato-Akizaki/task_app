@@ -6,9 +6,13 @@ Rails.application.routes.draw do
   post   "/login"  => "sessions#create"
   delete "/logout" => "sessions#destroy"
 
-  resources :users, except: :index 
-  resources :tasks, except: :index
+
+  resources :users, except: :index
+  resources :tasks, except: :index 
+  resources :labels
   namespace :admin do
-    resources :users
+    resources :users 
   end
+  
+  get '*path', controller: 'application', action: 'render_404'
 end
